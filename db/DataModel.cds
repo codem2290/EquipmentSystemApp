@@ -84,3 +84,8 @@ entity Roles {
     key code : String(2);
         type : String(15);
 }
+
+entity SampleEntity {
+    key ID   : Int16;
+        type : String;
+}
