@@ -90,3 +90,9 @@ entity SampleEntity  {
     key ID   :  Int16;
         type : String;
 }
+
+
+entity Demo {
+    key ID   : Int16;
+        type : String;
+}
