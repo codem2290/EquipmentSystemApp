@@ -6,11 +6,11 @@ using {
 } from '@sap/cds/common';
 
 entity Equipments : cuid, managed {
-    name          : String(50) @title: '{i18n>name}';
+    name          : String(50)  @title: '{i18n>name}';
     type          : Association to EquipmentTypes;
     location      : Association to Locations;
     status        : Association to EquipmentStatus;
-    description   : String(200);
+    description   : String(200) @title: '{i18n>description}';
     manufacturing : String(100);
     tasks         : Composition of many Tasks
                         on tasks.equipment = $self;
@@ -46,7 +46,7 @@ entity Employees : cuid, managed {
 
 
 entity EquipmentTypes {
-    key code : String(2);
+    key code : String(3);
         name : String(50);
 }
 
@@ -56,13 +56,14 @@ entity TaskStatus {
 }
 
 entity Locations {
-    key locationId : String(3);
+    key locationId : String(6);
         name       : String(50);
 }
 
 entity EquipmentStatus {
-    key equipmentCode : String(3);
+    key equipmentCode : String(15);
         name          : String(50);
+        colorCode     : Integer;
 }
 
 entity IssueStatus {
@@ -86,8 +87,8 @@ entity Roles {
 }
 
 //This is sample Entity
-entity SampleEntity  {
-    key ID   :  Int16;
+entity SampleEntity {
+    key ID   : Int16;
         type : String;
 }
 

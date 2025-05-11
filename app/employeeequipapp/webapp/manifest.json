@@ -1,7 +1,7 @@
 {
   "_version": "1.65.0",
   "sap.app": {
-    "id": "com.equip.demo.adminequipmentapp",
+    "id": "com.equip.demo.employeeequipapp",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -13,11 +13,11 @@
     "sourceTemplate": {
       "id": "@sap/generator-fiori:lrop",
       "version": "1.17.4",
-      "toolsId": "0229bdcb-8278-4871-a6c2-2017ddba34e0"
+      "toolsId": "70fa64e1-e4ae-4a0b-8ba1-c927aa368a16"
     },
     "dataSources": {
       "mainService": {
-        "uri": "/odata/v4/admin/",
+        "uri": "/odata/v4/employee/",
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -60,7 +60,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "com.equip.demo.adminequipmentapp.i18n.i18n"
+          "bundleName": "com.equip.demo.employeeequipapp.i18n.i18n"
         }
       },
       "": {
@@ -85,28 +85,28 @@
       "routes": [
         {
           "pattern": ":?query:",
-          "name": "EquipmentsList",
-          "target": "EquipmentsList"
+          "name": "MyTasksList",
+          "target": "MyTasksList"
         },
         {
-          "name": "EquipmentsObjectPage",
-          "pattern": "Equipments({EquipmentsKey}):?query:",
-          "target": "EquipmentsObjectPage"
+          "pattern": "MyTasks({key}):?query:",
+          "name": "MyTasksObjectPage",
+          "target": "MyTasksObjectPage"
         }
       ],
       "targets": {
-        "EquipmentsList": {
+        "MyTasksList": {
           "type": "Component",
-          "id": "EquipmentsList",
+          "id": "MyTasksList",
           "name": "sap.fe.templates.ListReport",
           "options": {
             "settings": {
-              "contextPath": "/Equipments",
+              "contextPath": "/MyTasks",
               "variantManagement": "Page",
               "navigation": {
-                "Equipments": {
+                "MyTasks": {
                   "detail": {
-                    "route": "EquipmentsObjectPage"
+                    "route": "MyTasksObjectPage"
                   }
                 }
               },
@@ -116,32 +116,18 @@
                     "type": "GridTable"
                   }
                 }
-              },
-              "initialLoad": "Enabled"
+              }
             }
           }
         },
-        "EquipmentsObjectPage": {
+        "MyTasksObjectPage": {
           "type": "Component",
-          "id": "EquipmentsObjectPage",
+          "id": "MyTasksObjectPage",
           "name": "sap.fe.templates.ObjectPage",
           "options": {
             "settings": {
-              "navigation": {},
-              "contextPath": "/Equipments",
-              "sectionLayout": "Tabs",
-              "controlConfiguration": {
-                "tasks/@com.sap.vocabularies.UI.v1.LineItem#i18nEquipmentTaskDetails": {
-                  "tableSettings": {
-                    "type": "GridTable"
-                  }
-                },
-                "issues/@com.sap.vocabularies.UI.v1.LineItem#i18nIssueDetails": {
-                  "tableSettings": {
-                    "type": "GridTable"
-                  }
-                }
-              }
+              "editableHeaderContent": false,
+              "contextPath": "/MyTasks"
             }
           }
         }
