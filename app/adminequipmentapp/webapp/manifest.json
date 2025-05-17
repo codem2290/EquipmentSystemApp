@@ -134,6 +134,26 @@
                 "tasks/@com.sap.vocabularies.UI.v1.LineItem#i18nEquipmentTaskDetails": {
                   "tableSettings": {
                     "type": "GridTable"
+                  },
+                  "columns": {
+                    "DataField::ID": {
+                      "width": "12rem"
+                    },
+                    "DataField::description": {
+                      "width": "15rem"
+                    },
+                    "DataField::dueDate": {
+                      "width": "10rem"
+                    },
+                    "DataField::priority_code": {
+                      "width": "12rem"
+                    },
+                    "DataField::status_code": {
+                      "width": "12rem"
+                    },
+                    "DataField::assignedTo_ID": {
+                      "width": "14rem"
+                    }
                   }
                 },
                 "issues/@com.sap.vocabularies.UI.v1.LineItem#i18nIssueDetails": {

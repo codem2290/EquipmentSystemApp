@@ -114,6 +114,15 @@
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
                     "type": "GridTable"
+                  },
+                  "actions": {
+                    "completeBtn": {
+                      "press": "com.equip.demo.employeeequipapp.ext.controller.StatusUpdateHandler.updateStatusComplete",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": false,
+                      "text": "Mark as Complete"
+                    }
                   }
                 }
               }

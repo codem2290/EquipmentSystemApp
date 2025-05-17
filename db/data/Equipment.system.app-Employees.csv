@@ -1,1 +1,5 @@
 ID,name,username,email,role_code,createdAt,createdBy,modifiedAt,modifiedBy
+d1f2aabb-1111-4a1a-bb22-223344556601,John Doe,jdoe,john.doe@example.com,AD,2024-01-01T10:00:00Z,admin,2024-01-01T10:00:00Z,admin
+d1f2aabb-2222-4a1a-bb22-223344556602,Jane Smith,jsmith,jane.smith@example.com,EM,2024-01-02T11:00:00Z,admin,2024-01-02T11:00:00Z,admin
+d1f2aabb-3333-4a1a-bb22-223344556603,Michael Brown,mbrown,michael.brown@example.com,EM,2024-01-03T12:00:00Z,admin,2024-01-03T12:00:00Z,admin
+d1f2aabb-4444-4a1a-bb22-223344556604,Lisa Green,lgreen,lisa.green@example.com,EM,2024-01-04T13:00:00Z,admin,2024-01-04T13:00:00Z,admin
