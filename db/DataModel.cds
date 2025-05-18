@@ -49,8 +49,9 @@ entity Employees : cuid, managed {
 
 
 entity EquipmentTypes {
-    key code : String(3);
-        name : String(50);
+    key code        : String(3);
+        name        : String(50);
+        manufacture : String;
 }
 
 entity TaskStatus {

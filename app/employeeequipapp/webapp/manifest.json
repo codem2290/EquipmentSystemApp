@@ -120,7 +120,7 @@
                       "press": "com.equip.demo.employeeequipapp.ext.controller.StatusUpdateHandler.updateStatusComplete",
                       "visible": true,
                       "enabled": true,
-                      "requiresSelection": false,
+                      "requiresSelection": true,
                       "text": "Mark as Complete"
                     }
                   }
