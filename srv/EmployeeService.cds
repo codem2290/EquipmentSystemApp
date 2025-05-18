@@ -7,7 +7,7 @@ service EmployeeService {
     entity Equipments as projection on service.Equipments;
 
     type ArrayEmpData {
-        empid: String;
+        taskid: String;
     }
 
     action updateTaskStatusCompleted(taskData : array of ArrayEmpData) returns String;

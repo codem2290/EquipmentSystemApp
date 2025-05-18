@@ -290,3 +290,13 @@ annotate service.Tasks with {
     description @UI.MultiLineText : true
 };
 
+annotate service.Equipments with {
+    manufacturing @Common.FieldControl : #ReadOnly
+};
+
+//Updates the Manufaturing based on Equipment Type Dropdown using side effects
+annotate service.Equipments with @(Common.SideEffects #updateManufacture: {
+    SourceProperties: ['type_code'],
+    TargetProperties: ['manufacturing']
+});
+
