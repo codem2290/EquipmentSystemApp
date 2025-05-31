@@ -1,0 +1,24 @@
+### Reading Equipment data from Employee Service 
+
+GET http://localhost:4004/odata/v4/employee/Equipments
+Authorization: Basic ZW1wbG95ZWVUZXN0ZXJAdGVzdGVyLnNhcC5jb206MTIzNDU=
+Content-Type: application/json
+
+
+### Creating new record in Equipments using Employee Service 
+POST http://localhost:39665/odata/v4/employee/Equipments
+Authorization: Basic ZW1wbG95ZWVUZXN0ZXJAdGVzdGVyLnNhcC5jb206MTIzNDU=
+Content-Type: application/json
+
+{
+      "createdAt": "2024-01-10T10:30:00.000Z",
+      "createdBy": "admin",
+      "modifiedAt": "2024-03-15T15:00:00.000Z",
+      "modifiedBy": "admin",
+      "name": "Welding Machine",
+      "type_code": "WLD",
+      "location_locationId": "LOC002",
+      "status_equipmentCode": "Maintenance",
+      "description": "Welding Machine",
+      "manufacturing": "Bosch"
+    }

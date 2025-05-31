@@ -24,6 +24,20 @@
           "odataVersion": "4.0"
         }
       }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "employeeequipapp-display": {
+          "semanticObject": "employeeequipapp",
+          "action": "display",
+          "title": "Task Maintience App",
+          "subTitle": "Employee",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
     }
   },
   "sap.ui": {
@@ -146,5 +160,9 @@
   "sap.fiori": {
     "registrationIds": [],
     "archeType": "transactional"
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "EquipmentSystemApp.service"
   }
 }
