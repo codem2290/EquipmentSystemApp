@@ -1,0 +1,169 @@
+_schema-version: 3.3.0
+ID: EquipmentSystemApp
+version: 1.0.0
+description: "A simple CAP project."
+parameters:
+  enable-parallel-deployments: true
+  deploy_mode: html5-repo
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm ci
+        - npx cds build --production
+modules:
+  - name: EquipmentSystemApp-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      instances: 1
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: npm-ci
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: EquipmentSystemApp-db
+      - name: EquipmentSystemApp-auth
+      - name: EquipmentSystemApp-destination
+
+  - name: EquipmentSystemApp-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      - name: EquipmentSystemApp-db
+
+  - name: EquipmentSystemApp-app-deployer
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: EquipmentSystemApp-html5-repo-host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources/
+      requires:
+        - name: EquipmentSystemAppadminequipmentapp
+          artifacts:
+            - adminequipmentapp.zip
+          target-path: resources/
+        - name: EquipmentSystemAppemployeeequipapp
+          artifacts:
+            - employeeequipapp.zip
+          target-path: resources/
+
+  - name: EquipmentSystemAppadminequipmentapp
+    type: html5
+    path: app/adminequipmentapp
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
+  - name: EquipmentSystemAppemployeeequipapp
+    type: html5
+    path: app/employeeequipapp
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
+
+  - name: EquipmentSystemApp-destinations
+    type: com.sap.application.content
+    requires:
+      - name: EquipmentSystemApp-auth
+        parameters:
+          service-key:
+            name: EquipmentSystemApp-auth-key
+      - name: EquipmentSystemApp-html5-repo-host
+        parameters:
+          service-key:
+            name: EquipmentSystemApp-html5-repo-host-key
+      - name: srv-api
+      - name: EquipmentSystemApp-destination
+        parameters:
+          content-target: true
+    build-parameters:
+      no-source: true
+    parameters:
+      content:
+        instance:
+          existing_destinations_policy: update
+          destinations:
+            - Name: EquipmentSystemApp-html5-repository
+              ServiceInstanceName: EquipmentSystemApp-html5-repo-host
+              ServiceKeyName: EquipmentSystemApp-html5-repo-host-key
+              sap.cloud.service: EquipmentSystemApp.service
+            - Name: EquipmentSystemApp-auth
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: EquipmentSystemApp-auth
+              ServiceKeyName: EquipmentSystemApp-auth-key
+              sap.cloud.service: EquipmentSystemApp.service
+
+resources:
+  - name: EquipmentSystemApp-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+
+  - name: EquipmentSystemApp-html5-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+  - name: EquipmentSystemApp-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: EquipmentSystemApp-${org}-${space}
+        tenant-mode: dedicated
+  - name: EquipmentSystemApp-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+        init_data:
+          instance:
+            existing_destinations_policy: update
+            destinations:
+              - Name: srv-api
+                URL: ~{srv-api/srv-url}
+                Authentication: NoAuthentication
+                Type: HTTP
+                ProxyType: Internet
+                HTML5.ForwardAuthToken: true
+                HTML5.DynamicDestination: true
+              - Name: ui5
+                URL: https://ui5.sap.com
+                Authentication: NoAuthentication
+                Type: HTTP
+                ProxyType: Internet
+    requires:
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api # must be used in xs-app.json as well
+          url: ~{srv-url}
+          forwardAuthToken: true
+  - name: EquipmentSystemApp-html5-runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-runtime
