@@ -34,6 +34,10 @@ service AdminService {
     entity TaskStatus      as projection on service.TaskStatus;
     entity Roles           as projection on service.Roles;
     entity EquipmentTypes  as projection on service.EquipmentTypes;
+
+    //Call Procedure using Function
+
+    function getEquipmentsDataFunc() returns String;
 }
 
 //annotate AdminService.Equipments with @odata.draft.enabled;

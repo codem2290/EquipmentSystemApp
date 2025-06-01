@@ -33,6 +33,21 @@ class AdminService extends cds.ApplicationService {
 
         });
 
+        this.on("getEquipmentsDataFunc", async (req) => {
+            let dbquery = `Call "getEquipmentDataByProcedure"( EQUIPMENT_DATA=>?, TASK_DATA=>? )`;
+            let data = await cds.run(dbquery);
+            if(data){
+                let result = {
+                    equipmentData: data.EQUIPMENT_DATA,
+                    taskData: data.TASK_DATA
+                }
+
+                return result;
+            }
+
+            return req.error(404, "Failed to call procedure!");
+        });
+
         return super.init();
     }
 }

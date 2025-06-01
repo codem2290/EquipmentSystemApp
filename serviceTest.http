@@ -22,3 +22,7 @@ Content-Type: application/json
       "description": "Welding Machine",
       "manufacturing": "Bosch"
     }
+
+### Call Procedure function
+  GET http://localhost:46473/odata/v4/admin/getEquipmentsDataFunc
+  Content-Type: application/json

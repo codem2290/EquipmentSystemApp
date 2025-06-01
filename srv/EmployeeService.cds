@@ -21,6 +21,6 @@ service EmployeeService {
         taskid : String;
     }
 
-    action updateTaskStatusCompleted(taskData : array of ArrayEmpData) returns String;
+    action updateTaskStatusCompleted @(restrict: [{ to: 'Admin' }]) (taskData : array of ArrayEmpData) returns String;
 
 }
