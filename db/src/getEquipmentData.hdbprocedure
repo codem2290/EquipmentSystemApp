@@ -1,0 +1,24 @@
+PROCEDURE "getEquipmentDataByProcedure"(
+    OUT EQUIPMENT_DATA TABLE (NAME VARCHAR(25), DESCR VARCHAR(250), MANUFACTURER VARCHAR(100)),
+    OUT TASK_DATA TABLE (DESCRIP VARCHAR(30), STATUS_CODE VARCHAR(10), DUEDATE DATE)
+    )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   READS SQL DATA AS
+BEGIN
+   /*************************************
+       Write your procedure logic
+   *************************************/
+
+   EQUIPMENT_DATA = SELECT "NAME" AS NAME,
+                            "DESCRIPTION" AS DESCR,
+                            "MANUFACTURING" AS MANUFACTURER
+                            FROM "EQUIPMENT_SYSTEM_APP_EQUIPMENTS";
+
+    TASK_DATA = SELECT "DESCRIPTION" AS DESCRIP,
+                                        "STATUS_CODE" AS STATUS_CODE,
+                                        "DUEDATE" AS DUEDATE
+                                        FROM "EQUIPMENT_SYSTEM_APP_TASKS";
+
+END
