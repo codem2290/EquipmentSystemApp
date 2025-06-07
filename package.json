@@ -9,7 +9,10 @@
     "@sap/cds": "^8",
     "express": "^4",
     "@cap-js/hana": "^1",
-    "@sap/xssec": "^4"
+    "@sap/xssec": "^4",
+    "@sap-cloud-sdk/connectivity": "^3",
+    "@sap-cloud-sdk/http-client": "^3",
+    "@sap-cloud-sdk/resilience": "^3"
   },
   "devDependencies": {
     "@cap-js/cds-types": "^0.9.0",
@@ -48,7 +51,15 @@
       },
       "html5-runtime": true,
       "destinations": true,
-      "workzone": true
+      "workzone": true,
+      "CustomerS4API": {
+        "kind": "odata-v2",
+        "model": "srv/external/CustomerS4API",
+        "credentials": {
+          "destination": "s4hana",
+          "path": "/sap/opu/odata/SAP/ZCUSTOMERSERVICE_SRV"
+        }
+      }
     },
     "sql": {
       "native_hana_associations": false

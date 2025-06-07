@@ -1,4 +1,5 @@
 using {Equipment.system.app as service} from '../db/DataModel';
+using {CustomerS4API as ExternalAPI} from './external/CustomerS4API';
 
 service EmployeeService {
 
@@ -22,5 +23,8 @@ service EmployeeService {
     }
 
     action updateTaskStatusCompleted @(restrict: [{ to: 'Admin' }]) (taskData : array of ArrayEmpData) returns String;
+
+    //Get External S4 Hana Entity Details
+    entity CustomerSet as projection on ExternalAPI.CustomerSet;
 
 }

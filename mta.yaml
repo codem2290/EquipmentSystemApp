@@ -28,6 +28,9 @@ modules:
       - name: EquipmentSystemApp-db
       - name: EquipmentSystemApp-auth
       - name: EquipmentSystemApp-destination
+      - name: EquipmentSystemApp-autoscaler
+        parameters:
+          path: "./policy.json"
 
   - name: EquipmentSystemApp-db-deployer
     type: hdb
@@ -65,8 +68,7 @@ modules:
       commands:
         - npm ci
         - npm run build
-      supported-platforms:
-        []
+      supported-platforms: []
   - name: EquipmentSystemAppemployeeequipapp
     type: html5
     path: app/employeeequipapp
@@ -76,8 +78,7 @@ modules:
       commands:
         - npm ci
         - npm run build
-      supported-platforms:
-        []
+      supported-platforms: []
 
   - name: EquipmentSystemApp-destinations
     type: com.sap.application.content
@@ -167,3 +168,8 @@ resources:
     parameters:
       service: html5-apps-repo
       service-plan: app-runtime
+  - name: EquipmentSystemApp-autoscaler
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: autoscaler
+      service-plan: standard
