@@ -1,10 +1,10 @@
 const cds = require('@sap/cds');
 
 class EmployeeService extends cds.ApplicationService {
-    init() {
+    async init() {
         //get Entities 
-        const { MyTasks } = this.entities;
-
+        const { MyTasks, CustomerSet } = this.entities;
+        const s4instance = await cds.connect.to('CustomerS4API');
         //Capture Custom Action defined in Employee Service
         this.on('updateTaskStatusCompleted', async (req) => {
             try {
@@ -28,6 +28,11 @@ class EmployeeService extends cds.ApplicationService {
             }
 
         });
+
+        this.on('READ', CustomerSet, async (req) => {
+            return s4instance.run(req.query);
+        });
+
         return super.init();
     }
 }
