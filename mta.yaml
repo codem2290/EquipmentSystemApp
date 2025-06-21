@@ -39,6 +39,13 @@ modules:
       buildpack: nodejs_buildpack
     requires:
       - name: EquipmentSystemApp-db
+        properties:
+          TARGET_CONTAINER: ~{hdi-service-name}
+      - name: ccap-db
+        group: SERVICE_REPLACEMENTS
+        properties:
+          key: ccap-db-hdi
+          service: ~{ccap-db-hdi}
 
   - name: EquipmentSystemApp-app-deployer
     type: com.sap.application.content
@@ -118,6 +125,14 @@ resources:
     parameters:
       service: hana
       service-plan: hdi-shared
+    properties:
+      hdi-service-name: ${service-name}
+  - name: ccap-db
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: ccap-db
+    properties:
+      ccap-db-hdi: ${service-name}
 
   - name: EquipmentSystemApp-html5-repo-host
     type: org.cloudfoundry.managed-service

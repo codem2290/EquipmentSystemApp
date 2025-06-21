@@ -102,3 +102,9 @@ entity Demo {
     key ID   : Int16;
         type : String;
 }
+
+@cds.persistence.exist
+entity Sellers {
+     key ID: Integer;
+        name: String(30);
+}
