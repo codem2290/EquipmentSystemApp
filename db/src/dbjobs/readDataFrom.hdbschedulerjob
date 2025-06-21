@@ -1,0 +1,3 @@
+SCHEDULER JOB "readDataFrom"
+  CRON '* * * * * * 0' ENABLE PROCEDURE "getEquipmentData"
+ 

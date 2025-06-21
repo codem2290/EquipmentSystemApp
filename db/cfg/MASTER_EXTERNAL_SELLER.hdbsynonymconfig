@@ -1,0 +1,8 @@
+{
+    "EQUIPMENT_SYSTEM_APP_SELLERS": {
+        "target": {
+            "object": "CCAP_DB_SELLERS",
+            "schema.configure": "ccap-db-hdi/schema"
+        }
+    }
+}

@@ -38,6 +38,8 @@ service AdminService {
     //Call Procedure using Function
 
     function getEquipmentsDataFunc() returns String;
+
+    entity Sellers as projection on service.Sellers;
 }
 
 //annotate AdminService.Equipments with @odata.draft.enabled;

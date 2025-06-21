@@ -1,0 +1,14 @@
+{
+    "ccap-db-hdi": {
+        "object_owner": {
+            "container_roles": [
+                "MASTER_EXTERNAL_SELLER_ACCESS_G#"
+            ]
+        },
+        "application_user": {
+            "container_roles": [
+                "MASTER_EXTERNAL_SELLER_ACCESS"
+            ]
+        }
+    }
+}
