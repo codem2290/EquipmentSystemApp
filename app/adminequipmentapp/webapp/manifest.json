@@ -106,6 +106,11 @@
           "name": "EquipmentsObjectPage",
           "pattern": "Equipments({EquipmentsKey}):?query:",
           "target": "EquipmentsObjectPage"
+        },
+        {
+          "name": "Equipments_issuesObjectPage",
+          "pattern": "Equipments({EquipmentsKey})/issues({issuesKey}):?query:",
+          "target": "Equipments_issuesObjectPage"
         }
       ],
       "targets": {
@@ -141,7 +146,13 @@
           "name": "sap.fe.templates.ObjectPage",
           "options": {
             "settings": {
-              "navigation": {},
+              "navigation": {
+                "issues": {
+                  "detail": {
+                    "route": "Equipments_issuesObjectPage"
+                  }
+                }
+              },
               "contextPath": "/Equipments",
               "sectionLayout": "Tabs",
               "controlConfiguration": {
@@ -176,6 +187,17 @@
                   }
                 }
               }
+            }
+          }
+        },
+        "Equipments_issuesObjectPage": {
+          "type": "Component",
+          "id": "Equipments_issuesObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "navigation": {},
+              "contextPath": "/Equipments/issues"
             }
           }
         }

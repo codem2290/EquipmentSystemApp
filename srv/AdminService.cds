@@ -34,6 +34,10 @@ service AdminService {
     entity TaskStatus      as projection on service.TaskStatus;
     entity Roles           as projection on service.Roles;
     entity EquipmentTypes  as projection on service.EquipmentTypes;
+    entity Attachments @(restrict: [{
+        grant: ['*'],
+        to   : ['adminUser']
+    }])                     as projection on service.Attachments;
 
     //Call Procedure using Function
 

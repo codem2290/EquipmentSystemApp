@@ -38,6 +38,18 @@ entity Issues : cuid, managed {
     equipment   : Association to Equipments;
     issueStatus : Association to IssueStatus;
     task        : Association to Tasks;
+    attachments: Composition of many Attachments on attachments.issue = $self;
+}
+
+entity Attachments: cuid {
+    issue: Association to Issues;
+    fileName: String;
+    @Core.IsMediaType: true
+    fileType: String;
+    @Core.ContentDisposition.Filename: fileName
+    @Core.ContentDisposition.Type: 'inline'
+    @Core.MediaType:  fileType
+    fileContent: LargeBinary;
 }
 
 

@@ -1,4 +1,6 @@
 using AdminService as service from '../../srv/AdminService';
+using from '../../db/DataModel';
+
 
 annotate service.Equipments with @(UI.LineItem: [
     {
@@ -217,7 +219,46 @@ annotate service.Issues with @(
             Value : reportedBy_ID,
             Label : 'reportedBy_ID',
         },
-    ]
+    ],
+    UI.Facets : [
+        {
+            $Type : 'UI.ReferenceFacet',
+            Label : 'Issue Details',
+            ID : 'IssueDetails',
+            Target : '@UI.FieldGroup#IssueDetails',
+        },
+        {
+            $Type : 'UI.ReferenceFacet',
+            Label : 'Attachment Details',
+            ID : 'AttachmentDetails',
+            Target : 'attachments/@UI.LineItem#AttachmentDetails',
+        },
+    ],
+    UI.FieldGroup #IssueDetails : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : ID,
+                Label : 'ID',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : issueStatus_statusCode,
+                Label : 'Issue Status',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : equipment_ID,
+                Label : 'Equipment',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : description,
+                Label : 'Description',
+            },
+        ],
+    },
 );
 
 annotate service.Tasks with {
@@ -299,4 +340,56 @@ annotate service.Equipments with @(Common.SideEffects #updateManufacture: {
     SourceProperties: ['type_code'],
     TargetProperties: ['manufacturing']
 });
+
+annotate service.Attachments with @(
+    UI.LineItem #AttachmentDetails : [
+        {
+            $Type : 'UI.DataField',
+            Value : ID,
+            Label : 'ID',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : fileName,
+            Label : 'File Name',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : fileType,
+            Label : 'File Type',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : fileContent,
+            Label : 'Attach File',
+        },
+    ]
+);
+
+annotate service.Issues with {
+    issueStatus @(Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'IssueStatus',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : issueStatus_statusCode,
+                    ValueListProperty : 'statusCode',
+                },
+            ],
+        },
+        Common.ValueListWithFixedValues : true
+)};
+
+annotate service.IssueStatus with {
+    statusCode @Common.Text : name
+};
+
+annotate service.Attachments with {
+    fileName @Common.FieldControl : #ReadOnly
+};
+
+annotate service.Attachments with {
+    fileType @Common.FieldControl : #ReadOnly
+};
 
