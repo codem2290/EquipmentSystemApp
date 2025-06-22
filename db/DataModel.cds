@@ -38,7 +38,7 @@ entity Issues : cuid, managed {
     equipment   : Association to Equipments;
     issueStatus : Association to IssueStatus;
     task        : Association to Tasks;
-    attachments: Composition of many Attachments on attachments.issue = $self;
+    attachments: Composition of many Attachments on attachments.issue = $self; // For Attachments
 }
 
 entity Attachments: cuid {
